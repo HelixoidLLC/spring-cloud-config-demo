@@ -1,32 +1,42 @@
+info:
+  description: Spring Cloud Samples
+  url: https://github.com/IgorShare/spring-cloud-config-demo
 eureka:
-  instance:
-    leaseRenewalIntervalInSeconds: 10
-    metadataMap:
-      instanceId: ${vcap.application.instance_id:${spring.application.name}:${server.port:8080}}
+  # password: 'password'
   client:
     serviceUrl:
-      defaultZone: ${vcap.services.service-registry.credentials.uri:http://127.0.0.1:8761}/eureka/
+      # defaultZone: http://user:${eureka.password:}@localhost:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
 
----
-spring:
-  profiles: cloud
-eureka:
-  instance:
-    hostname: ${vcap.application.uris[0]}
-    nonSecurePort: 80
-
----
-spring:
-  profiles: lattice
-server:
-  port: 8080
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://eureka.192.168.11.11.xip.io/eureka/
-  instance:
-    hostname: ${instance.ip}
-    nonSecurePort: ${instance.port}
-lattice:
-  receptor:
-    host: receptor.192.168.11.11.xip.io
+# eureka:
+#   instance:
+#     leaseRenewalIntervalInSeconds: 10
+#     metadataMap:
+#       instanceId: ${vcap.application.instance_id:${spring.application.name}:${server.port:8080}}
+#   client:
+#     serviceUrl:
+#       defaultZone: ${vcap.services.service-registry.credentials.uri:http://127.0.0.1:8761}/eureka/
+#
+# ---
+# spring:
+#   profiles: cloud
+# eureka:
+#   instance:
+#     hostname: ${vcap.application.uris[0]}
+#     nonSecurePort: 80
+#
+# ---
+# spring:
+#   profiles: lattice
+# server:
+#   port: 8080
+# eureka:
+#   client:
+#     serviceUrl:
+#       defaultZone: http://eureka.192.168.11.11.xip.io/eureka/
+#   instance:
+#     hostname: ${instance.ip}
+#     nonSecurePort: ${instance.port}
+# lattice:
+#   receptor:
+#     host: receptor.192.168.11.11.xip.io
